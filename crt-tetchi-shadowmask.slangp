@@ -1,0 +1,9 @@
+shaders = 2
+
+shader0 = "gun_tetchi_pass.slang"
+filter_linear0 = false
+scale_type0 = viewport
+scale0 = 1.0
+
+shader1 = "phosphor_tetchi_shadowmask.slang"
+filter_linear1 = true
