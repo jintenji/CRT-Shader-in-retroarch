@@ -1,6 +1,16 @@
 #version 450
 
-layout(push_constant) uniform Push { vec4 SourceSize; vec4 OriginalSize; vec4 OutputSize; uint FrameCount; } params;
+// Parameter for RetroArch shader menu
+#pragma parameter MASK_SCALE "Phosphor Mask Scale" 1.0 1.0 4.0 1.0
+
+layout(push_constant) uniform Push { 
+    vec4 SourceSize; 
+    vec4 OriginalSize; 
+    vec4 OutputSize; 
+    uint FrameCount; 
+    float MASK_SCALE; // Bound parameter variable
+} params;
+
 layout(std140, set = 0, binding = 0) uniform UBO { mat4 MVP; } global;
 
 #pragma stage vertex
@@ -31,8 +41,8 @@ void main() {
     bloom_color *= (brightness_boost * white_balance);
 
     // Scaled Shadow Mask Generation (Staggered triad / Honeycomb pattern)
-    // Scale up the mask (e.g., 2.0x) to prevent sub-pixel moiré on high-res displays
-    float mask_scale = 2.0; 
+    // Scale up the mask via RetroArch parameter
+    float mask_scale = params.MASK_SCALE; 
     vec2 pos = (vTexCoord * params.OutputSize.xy) / mask_scale;
     
     // Stagger alternate rows to create the honeycomb arrangement
