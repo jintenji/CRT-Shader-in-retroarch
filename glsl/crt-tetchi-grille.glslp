@@ -1,0 +1,12 @@
+shaders = 2
+
+shader0 = "gun_tetchi_pass.glsl"
+filter_linear0 = false
+scale_type0 = viewport
+scale0 = 1.0
+
+shader1 = "phosphor_tetchi_grille.glsl"
+filter_linear1 = true
+
+parameters = "MASK_SCALE"
+MASK_SCALE = 1.0
